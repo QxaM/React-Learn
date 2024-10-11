@@ -16,23 +16,9 @@ function App() {
   const [modalIsOpen, setModalIsOpen] = useState(false);
 
   const [isFetching, setIsFetching] = useState(false);
-  const [availablePlaces, setAvailablePlaces] = useState([]);
   const [error, setError] = useState();
 
-  useEffect(() => {
-    const fetchPlaces = async () => {
-      setIsFetching(true);
-
-      try {
-        const userPlaces = await fetchUserPlaces();
-        setUserPlaces(userPlaces);
-      } catch (error) {
-        setError({ message: error.message || "Failed to fetch user places" });
-      }
-      setIsFetching(false);
-    };
-    fetchPlaces();
-  }, []);
+  useFetch();
 
   function handleStartRemovePlace(place) {
     setModalIsOpen(true);
