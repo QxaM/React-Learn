@@ -1,18 +1,23 @@
+import React, { useRef, useState } from "react";
+
 export default function Login() {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const [emailIsInvalid, setEmailIsInvalid] = useState(false);
+
+  const email = useRef();
+  const password = useRef();
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    console.log("Submitted");
-  };
 
-  const handleEmailChange = (event) => {
-    setEmail(event.target.value);
-  };
+    const enteredEmail = email.current.value;
+    const enteredPassword = password.current.value;
 
-  const handlePasswordChange = (event) => {
-    setPassword(event.target.value);
+    const emailIsValid = enteredEmail.includes("@");
+    if (!emailIsValid) {
+      setEmailIsInvalid(true);
+      return;
+    }
+    setEmailIsInvalid(false);
   };
 
   return (
@@ -21,25 +26,8 @@ export default function Login() {
 
       <div className="control-row">
         <div className="control no-margin">
-          <label htmlFor="email">Email</label>
-          <input
-            id="email"
-            type="email"
-            name="email"
-            onChange={handleEmailChange}
-            value={email}
-          />
-        </div>
-
-        <div className="control no-margin">
           <label htmlFor="password">Password</label>
-          <input
-            id="password"
-            type="password"
-            name="password"
-            onChange={handlePasswordChange}
-            value={password}
-          />
+          <input id="password" type="password" name="password" ref={password} />
         </div>
       </div>
 
