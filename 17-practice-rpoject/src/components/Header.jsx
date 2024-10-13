@@ -2,7 +2,7 @@ import React from "react";
 import ReactfoodLogo from "../assets/logo.jpg";
 import Button from "./UI/Button";
 import { useCart } from "../hooks/useCart";
-import { useCartModal } from "../hooks/useCartModal";
+import { useCartModal } from "../hooks/useUserProgress";
 
 const Header = () => {
   const { items } = useCart();

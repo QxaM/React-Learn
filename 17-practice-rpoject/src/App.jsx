@@ -2,18 +2,20 @@ import React from "react";
 import Header from "./components/Header";
 import Meals from "./components/Meals";
 import CartContextProvider from "./store/shopping-cart-context";
-import CartModalProvider from "./store/cart-modal-context";
+import UserProgressContextProvider from "./store/UserProgressContext";
 import Cart from "./components/Cart";
+import Checkout from "./components/Checkout";
 
 function App() {
   return (
     <>
       <CartContextProvider>
-        <CartModalProvider>
+        <UserProgressContextProvider>
           <Header />
           <Meals />
           <Cart />
-        </CartModalProvider>
+          <Checkout />
+        </UserProgressContextProvider>
       </CartContextProvider>
     </>
   );

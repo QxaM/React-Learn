@@ -31,9 +31,11 @@ const decrementItemCount = (array, item) => {
 };
 
 const cartReducer = (state, action) => {
-  const foundItem = state.find(
-    (item) => item.title === action.payload.item.title
-  );
+  let foundItem;
+  if (action.payload?.item?.title) {
+    foundItem = state.find((item) => item.title === action.payload.item.title);
+  }
+
   switch (action.type) {
     case "ADD_ITEM": {
       if (foundItem) {
@@ -54,6 +56,10 @@ const cartReducer = (state, action) => {
         return decrementItemCount(state, foundItem);
       }
       return state;
+    }
+
+    case "CLEAR": {
+      return [];
     }
 
     default:
@@ -91,7 +97,19 @@ const CartContextProvider = ({ children }) => {
     });
   };
 
-  const contextValues = { items, addItem, incrementItem, decrementItem };
+  const clearCart = () => {
+    setItems({
+      type: "CLEAR",
+    });
+  };
+
+  const contextValues = {
+    items,
+    addItem,
+    incrementItem,
+    decrementItem,
+    clearCart,
+  };
 
   return (
     <CartContext.Provider value={contextValues}>

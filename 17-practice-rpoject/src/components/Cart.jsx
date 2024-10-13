@@ -1,13 +1,16 @@
 import React from "react";
 import Modal from "./UI/Modal";
 import CartDetails from "./CartDetails";
-import { useCartModal } from "../hooks/useCartModal";
+import { useCartModal } from "../hooks/useUserProgress";
 
 const Cart = () => {
-  const { isOpened } = useCartModal();
+  const { progress, close } = useCartModal();
 
   return (
-    <Modal open={isOpened}>
+    <Modal
+      open={progress === "cart"}
+      onClose={progress === "cart" ? close : null}
+    >
       <CartDetails />
     </Modal>
   );

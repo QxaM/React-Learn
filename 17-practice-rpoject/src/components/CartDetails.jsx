@@ -1,13 +1,13 @@
 import React from "react";
 import Button from "./UI/Button";
 import { useCart } from "../hooks/useCart";
-import { useCartModal } from "../hooks/useCartModal";
+import { useCartModal } from "../hooks/useUserProgress";
 import CartItem from "./CartItem";
 import Formatter from "../util/formatter";
 
 const CartDetails = () => {
   const { items } = useCart();
-  const { closeCart } = useCartModal();
+  const { close, openCheckout } = useCartModal();
 
   let total = items.reduce(
     (accumulator, item) => accumulator + item.count * item.price,
@@ -26,10 +26,12 @@ const CartDetails = () => {
         <p>{Formatter.format(total, "USD")}</p>
       </div>
       <menu className="modal-actions">
-        <Button text onClick={closeCart}>
+        <Button text onClick={close}>
           Close
         </Button>
-        <Button>Go to Checkout</Button>
+        {items.length > 0 && (
+          <Button onClick={openCheckout}>Go to Checkout</Button>
+        )}
       </menu>
     </div>
   );
