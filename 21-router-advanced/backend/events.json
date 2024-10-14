@@ -1,11 +1,1 @@
-{
-  "events": [
-    {
-      "id": "e1",
-      "title": "A dummy event",
-      "date": "2023-02-22",
-      "image": "https://blog.hubspot.de/hubfs/Germany/Blog_images/Optimize_Marketing%20Events%20DACH%202021.jpg",
-      "description": "Join this amazing event and connect with fellow developers."
-    }
-  ]
-}
+{"events":[{"title":"testChanged","image":"https://img.pikbest.com/wp/202345/nasa-is-showing-some-image-of-the-solar-system_9585306.jpg!bw700","date":"2024-10-19","description":"test","id":"557039af-d8bb-444f-a7b2-d50c7d394599"},{"title":"test","image":"https://img.pikbest.com/wp/202345/nasa-is-showing-some-image-of-the-solar-system_9585306.jpg!bw700","date":"2024-10-22","description":"test","id":"04b22e31-9af6-4b7c-aabd-d82010d59a7b"},{"id":"e1","title":"A dummy event","date":"2023-02-22","image":"https://blog.hubspot.de/hubfs/Germany/Blog_images/Optimize_Marketing%20Events%20DACH%202021.jpg","description":"Join this amazing event and connect with fellow developers."}]}

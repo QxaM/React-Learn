@@ -1,28 +1,65 @@
-import { createBrowserRouter, RouterProvider } from "react-router-dom";
-import Root from "./pages/Root";
-import HomePage from "./pages/HomePage";
-import EventsPage from "./pages/EventsPage";
-import EventDetailPage from "./pages/EventDetailPage";
-import NewEventPage from "./pages/NewEventPage";
+import { RouterProvider, createBrowserRouter } from "react-router-dom";
+
 import EditEventPage from "./pages/EditEventPage";
-import EventsRoot from "./pages/EventsRoot";
-// BONUS: Add another (nested) layout route that adds the <EventNavigation> component above all /events... page components
+import ErrorPage from "./pages/ErrorPage";
+import EventDetailPage, {
+  loader as eventDetailLoader,
+  action as deleteEventAction,
+} from "./pages/EventDetailPage";
+import EventsPage, { loader as eventsLoader } from "./pages/EventsPage";
+import EventsRootLayout from "./pages/EventsRoot";
+import HomePage from "./pages/HomePage";
+import NewEventPage from "./pages/NewEventPage";
+import RootLayout from "./pages/Root";
+import { action as manipulateEventAction } from "./components/EventForm";
+import NewsletterPage, {
+  action as newsletterAction,
+} from "./pages/NewsletterPage";
 
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <Root />,
+    element: <RootLayout />,
+    errorElement: <ErrorPage />,
     children: [
       { index: true, element: <HomePage /> },
       {
-        path: "/events",
-        element: <EventsRoot />,
+        path: "events",
+        element: <EventsRootLayout />,
         children: [
-          { index: true, element: <EventsPage /> },
-          { path: "/events/:id", element: <EventDetailPage /> },
-          { path: "/events/new", element: <NewEventPage /> },
-          { path: "/events/:id/edit", element: <EditEventPage /> },
+          {
+            index: true,
+            element: <EventsPage />,
+            loader: eventsLoader,
+          },
+          {
+            path: ":eventId",
+            id: "event-detail",
+            loader: eventDetailLoader,
+            children: [
+              {
+                index: true,
+                element: <EventDetailPage />,
+                action: deleteEventAction,
+              },
+              {
+                path: "edit",
+                element: <EditEventPage />,
+                action: manipulateEventAction,
+              },
+            ],
+          },
+          {
+            path: "new",
+            element: <NewEventPage />,
+            action: manipulateEventAction,
+          },
         ],
+      },
+      {
+        path: "newsletter",
+        element: <NewsletterPage />,
+        action: newsletterAction,
       },
     ],
   },
