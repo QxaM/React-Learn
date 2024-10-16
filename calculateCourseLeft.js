@@ -1,4 +1,4 @@
-const modules = [28, 29, 30];
+const modules = [29, 30];
 const times = modules
   .map((module) => module - 1)
   .map((module) =>
